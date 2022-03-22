@@ -115,6 +115,7 @@ town* find_town(town* towns, int towns_count, char* name)
         }
         j++;
     }
+    printf("asf\n");
     return(NULL);
 }
 
