@@ -23,118 +23,118 @@ struct document {
     struct paragraph* data;
     int paragraph_count;//denotes number of paragraphs in a document
 };
-struct document get_document(char* text) {
-    int i = 0, prg_cnt = 0, snt_cnt = 0, word_cnt = 0, length = 0;
-    struct document doc;
-    struct paragraph *par;
-    struct sentence *sent;
-    struct word *word;
-    printf("1.\n");
-    doc.data = par;
-    par.data[a] = sent;
-    sent.data[s] = word;
-    printf("12\n");
+struct document get_document(char* text)
+{
+    int i = 0;
+    /*
+    int cnt_prg = 0, cnt_snt = 0, cnt_wrd = 0;
+    int     cnt_sntcs[5];
+    int     cnt_wrds[5][5];
+    int     wrd_lng[5][5][1005];
     while (text[i])
     {
-	printf("1\n");
         if (text[i] == '\n')
         {
-            doc.data[prg_cnt].sentence_count = snt_cnt;
-            snt_cnt = 0;
-            word_cnt = 0;
+            cnt_sntcs[cnt_prg] = cnt_snt;
+            cnt_snt = 0;
             length = -1;
-            prg_cnt++;
+            cnt_prg++;
         }
         if (text[i] == '.')
         {
-            word_cnt++;
-            doc.data[prg_cnt].data[snt_cnt].word_count = word_cnt;
-            snt_cnt++;
+            wrd_lng[cnt_prg][cnt_snt][cnt_wrd] = length;
+            cnt_wrd += 1;
+            cnt_wrds[cnt_prg][cnt_snt] = cnt_wrd;
+            cnt_wrd = 0;
             length = -1;
-            word_cnt = 0;
+            cnt_snt++;
         }
         if (text[i] == ' ')
         {
-            word_cnt++;
+            wrd_lng[cnt_prg][cnt_snt][cnt_wrd] = length;
             length = -1;
+            cnt_wrd++;
         }
         length++;
         i++;
     }
-    prg_cnt++;
-    doc.paragraph_count = prg_cnt;
-    prg_cnt = 0;
+    cnt_sntcs[cnt_prg] = cnt_snt;
+    cnt_prg++;
+    */
+    struct document doc;
+    doc.data = malloc(sizeof(struct paragraph) * 5);
+    doc.paragraph_count = 0;
+    int j, k;
     i = 0;
-    while (prg_cnt < doc.paragraph_count)
+    while (i < 5)
     {
-        doc.data = (struct paragraph *)malloc(sizeof(struct sentence *) * doc.paragraph_count);
-        snt_cnt = 0;
-        while (snt_cnt < doc.data[prg_cnt].sentence_count)
+        doc.data[i].data = malloc(sizeof(struct sentence) * 16);
+        doc.data[i].sentence_count = 0;
+        j = 0;
+        while (j < 16)
         {
-            doc.data[prg_cnt].data = (struct sentence *)malloc(sizeof(struct word *) * doc.data[prg_cnt].sentence_count);
-            word_cnt = 0;
-            while(word_cnt < doc.data[prg_cnt].data[snt_cnt].word_count)
+            doc.data[i].data[j].data = malloc(sizeof(struct word) * 128);
+            doc.data[i].data[j].word_count = 0;
+            k = 0;
+            while (k < 128)
             {
-                doc.data[prg_cnt].data[snt_cnt].data = (struct word *)malloc(sizeof(char *) * doc.data[prg_cnt].data[snt_cnt].word_count);
-                length = 0;
-                while (text[i] != '\n' && text[i] != ' ' && text[i] != '.' && text[i] != '\0')
-                {
-                    length++;
-                    i++;
-                }
-                while (text[i] == '\n' && text[i] == ' ' && text[i] == '.')
-                    i++;
-                doc.data[prg_cnt].data[snt_cnt].data[word_cnt].data = (char *)malloc(sizeof(char) * length + 1);
-                word_cnt++;
+                doc.data[i].data[j].data[k].data = malloc(sizeof(char) * 256);
+                k++;
             }
-            snt_cnt++;
+            j++;
         }
-        prg_cnt++;
+        i++;
     }
-    i = 0;
-    prg_cnt = 0, snt_cnt = 0, word_cnt = 0, length = 0;
-    while (text[i])
+    int l = 0, glcn = 0; 
+    i = 0, j = 0, k = 0;
+    while (text[i] != '\0')
     {
         if (text[i] == '\n')
         {
-            prg_cnt++;
-            snt_cnt = 0;
-            word_cnt = 0;
-            length = -1;
+            doc.data[j].data[k].data[l].data[glcn] = '\0';
+            doc.paragraph_count++;
+            j++;
+            k = 0;
+            l = 0;
+            glcn = 0;
         }
-        if (text[i] == '.')
+	else if (text[i] == '.')
         {
-            snt_cnt++;
-            word_cnt = 0;
-            length = -1;
+            doc.data[j].data[k].data[l].data[glcn] = '\0';
+            doc.data[j].data[k].word_count++;
+            doc.data[j].sentence_count++;
+            l = 0;
+            glcn = 0;
+            k++;
         }
-        if (text[i] == ' ')
+	else if (text[i] == ' ')
         {
-            word_cnt++;
-            length = -1;
+            doc.data[j].data[k].data[l].data[glcn] = '\0';
+            doc.data[j].data[k].word_count++;
+            l++;
+            glcn = 0;
         }
         else
-            doc.data[prg_cnt].data[snt_cnt].data[word_cnt].data[length] = text[i];
-        length++;
+        {
+            doc.data[j].data[k].data[l].data[glcn] = text[i];
+            glcn++;
+        }
         i++;
     }
-    return(doc);
-}
-struct word kth_word_in_mth_sentence_of_nth_paragraph(struct document Doc, int k, int m, int n) {
-    struct word wrd = Doc.data[n].data[m].data[k];
-    return(wrd);
+    return (doc);
 }
 
-struct sentence kth_sentence_in_mth_paragraph(struct document Doc, int k, int m) { 
-    struct sentence snt = Doc.data[m].data[k];
-    return(snt);
+struct word kth_word_in_mth_sentence_of_nth_paragraph(struct document Doc, int k, int m, int n) {
+    return(Doc.data[n - 1].data[m - 1].data[k - 1]);
+}
+
+struct sentence kth_sentence_in_mth_paragraph(struct document Doc, int k, int m) {
+    return(Doc.data[m - 1].data[k - 1]);
 }
 
 struct paragraph kth_paragraph(struct document Doc, int k) {
-    struct paragraph par = Doc.data[k];
-    return par;
+    return (Doc.data[k - 1]);
 }
-
 
 void print_word(struct word w) {
     printf("%s", w.data);
