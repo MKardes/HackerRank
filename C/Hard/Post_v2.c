@@ -58,7 +58,7 @@ void print_all_packages(town t)
 }
 
 int is_movalbe(post_office po, int w){
-    if( w >= po.min_weight && w <= po.max_weight)
+    if ( w >= po.min_weight && w <= po.max_weight)
          return 1;
     else
          return 0;

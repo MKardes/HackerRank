@@ -14,7 +14,7 @@ typedef struct triangle triangle;
 void sort_by_area(triangle* tr, int n) 
 {
     float *areas = (float *)malloc(sizeof(float) * n);
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         float p = (float)((tr[i].a + tr[i].b + tr[i].c) / 2);
         double m = sqrt((double)(p * (p - tr[i].a) * (p - tr[i].b) * (p - tr[i].c)));
