@@ -67,7 +67,7 @@ void send_all_acceptable_packages (town *s, int si, town *t, int ti)
 {
     int i, j;
 
-    while(i < s->offices[si].packages_count)
+    while (i < s->offices[si].packages_count)
     {
         if(is_movalbe(t->offices[ti], s->offices[si].packages[1].weight))
         {

@@ -38,7 +38,7 @@ void sort_by_area(triangle* tr, int n)
 
 int main()
 {
-	int n;
+	int	n;
 	scanf("%d", &n);
 	triangle *tr = malloc(n * sizeof(triangle));
 	for (int i = 0; i < n; i++) {

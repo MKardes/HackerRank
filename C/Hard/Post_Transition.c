@@ -12,7 +12,7 @@ typedef struct package package;
 
 struct post_office
 {
-	int	min_weight;
+	int min_weight;
 	int max_weight;
 	package* packages;
 	int packages_count;
