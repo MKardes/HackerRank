@@ -21,8 +21,3 @@ int squares(int a, int b)
     }
     return res;
 }
-
-int	main()
-{
-	printf()
-}
