@@ -212,36 +212,16 @@ int main() {
     }
     root = node;
     
-    
-    /*while (root)
-    {
-        cout << "in " << root->_name << endl; 
-        root = root->_inside;
-    }
+    /*
     cout << root->_name << endl;
         cout << "   " << root->_inside->_name << endl;
             cout << "      " << root->_inside->_inside->_name << endl;
             cout << "      " << root->_inside->_inside->_next->_name << endl;
         cout << "   " << root->_inside->_next->_name << endl;
             cout << "      " << root->_inside->_next->_inside->_name << endl;
-            cout << "      " << root->_inside->_next->_inside->_next->_name << endl;
-123
-43.4
-hello
-Not Found!
-Hello
-Universe!
-World!
-New
-Not Found!
-Not Found!
-34
-9.845
-Not Found!
-Not Found!
+            cout << "      " << root->_inside->_next->_inside->_next->_name << endl;  
     
-    */
-    // Okey !!!!!!!!!!
+    Okey !!!!!!!!!!   */
     
     i = 0;
     link *ptr;
